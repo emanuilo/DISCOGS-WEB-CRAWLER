@@ -28,14 +28,14 @@
 		<property name="hbm2ddl.auto">update</property>
 		
 		<mapping class="db.Album"/>
-
 		<mapping class="db.Artist"/>
-
 		<mapping class="db.Genre"/>
-
 		<mapping class="db.Track"/>
-
 		<mapping class="db.Style"/>
+		<mapping class="db.Album_Arrangers"/>
+		<mapping class="db.Album_Vocals"/>
+		<mapping class="db.Album_Writers"/>
+
 	</session-factory>
 
 </hibernate-configuration>

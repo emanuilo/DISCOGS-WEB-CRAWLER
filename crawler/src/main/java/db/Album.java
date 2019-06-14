@@ -1,8 +1,10 @@
 package db;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Date;
 
+@Entity
+@Table(name = "album", schema = "crawler_db")
 public class Album {
 
     @Id
@@ -11,9 +13,12 @@ public class Album {
 
     private String name;
 
+    @ManyToOne
+    private Artist artist;
+
     private String country;
 
-    private Integer released;
+    private Date released;
 
     private Integer versions;
 

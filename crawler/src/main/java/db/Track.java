@@ -1,8 +1,9 @@
 package db;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "track", schema = "crawler_db")
 public class Track {
 
     @Id
@@ -10,4 +11,7 @@ public class Track {
     private Long id;
 
     private String name;
+
+    @ManyToOne
+    private Album album;
 }
