@@ -6,14 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "artist", schema = "crawler_db")
+@Table(name = "artist")
 public class Artist {
-
     @Id
     @GeneratedValue
     private Long id;
 
     private String name;
+
+    private String website;
 
     public Artist(String name) {
         this.name = name;

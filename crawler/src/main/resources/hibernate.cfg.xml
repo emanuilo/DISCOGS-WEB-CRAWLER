@@ -16,7 +16,7 @@
 		<property name="connection.pool_size">5</property>
 
 		<!-- SQL dialect -->
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<!--<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>-->
 
 		<!-- Disable the second-level cache -->
 		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
@@ -30,11 +30,16 @@
 		<mapping class="db.Album"/>
 		<mapping class="db.Artist"/>
 		<mapping class="db.Genre"/>
+		<mapping class="db.Vocals"/>
 		<mapping class="db.Track"/>
 		<mapping class="db.Style"/>
-		<mapping class="db.Album_Arrangers"/>
-		<mapping class="db.Album_Vocals"/>
-		<mapping class="db.Album_Writers"/>
+		<mapping class="db.Credits"/>
+		<mapping class="db.ArrangedBy"/>
+		<mapping class="db.MusicBy"/>
+		<mapping class="db.LyricsBy"/>
+		<mapping class="db.Album_Genre"/>
+		<mapping class="db.Album_Style"/>
+
 
 	</session-factory>
 

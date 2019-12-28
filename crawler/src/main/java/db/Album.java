@@ -4,9 +4,8 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "album", schema = "crawler_db")
+@Table(name = "album")
 public class Album {
-
     @Id
     @GeneratedValue
     private Long id;

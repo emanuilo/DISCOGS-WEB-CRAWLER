@@ -3,9 +3,8 @@ package db;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "genre", schema = "crawler_db")
+@Table(name = "genre")
 public class Genre {
-
     @Id
     @GeneratedValue
     private Integer id;
