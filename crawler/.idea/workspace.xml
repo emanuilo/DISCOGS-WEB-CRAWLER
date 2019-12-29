@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0787091f-11bc-4129-a762-469963980ea5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/Album_Genre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/Album_Style.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/ArrangedBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/Credits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/LyricsBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/MusicBy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/db/Vocals.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Album.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Arrang_Id.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Arrangers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Vocals.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Vocals_Id.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Writers.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Writers_Id.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Style.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Style.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Track.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Track.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MyCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyCrawler.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -40,27 +22,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/MusicBy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/Style.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/db/Track.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -70,22 +31,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="323">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/Artist.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="187">
+              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/db/Vocals.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="85">
               <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -117,8 +75,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="130" selection-start-line="130" selection-end-line="130" />
+            <state relative-caret-position="978">
+              <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
+              <folding>
+                <element signature="method#MyCrawler#0;class#MyCrawler#0" />
+                <element signature="e#2474#3758#1" />
+                <element signature="e#2529#3690#0" />
+                <element signature="e#3174#3270#1" />
+                <element signature="e#3537#3633#1" />
+                <element signature="e#3918#3992#1" />
+                <element signature="method#visitPage#0;class#MyCrawler#0" />
+                <element signature="e#4355#4547#1" />
+                <element signature="method#nextPage#0;class#MyCrawler#0" />
+                <element signature="method#setupLogger#0;class#MyCrawler#0" />
+                <element signature="method#main#0;class#MyCrawler#0" />
+                <element signature="e#5163#5691#0" />
+                <element signature="e#5424#5681#1" />
+                <element signature="e#5712#5756#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/Artist.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,13 +110,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/Credits.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/TransactionalCode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/DataAccessLayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -141,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/db/LyricsBy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="102">
               <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -177,16 +166,13 @@
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Vocals.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Writers.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/src/main/java/MyCrawler.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Arrang_Id.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/MusicBy_Id.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/LyricsBy_Id.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/ArrangedBy_Id.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Genre.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Style.java" />
-        <option value="$PROJECT_DIR$/src/main/java/db/ArrangedBy.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Artist.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Credits.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Genre.java" />
@@ -195,6 +181,9 @@
         <option value="$PROJECT_DIR$/src/main/java/db/Style.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Track.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Vocals.java" />
+        <option value="$PROJECT_DIR$/src/main/java/db/ArrangedBy.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/MyCrawler.java" />
       </list>
     </option>
   </component>
@@ -210,8 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,10 +243,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577563401598" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577566698560" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -330,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576501106300</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new database hibernate classes">
+      <created>1577563413507</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1577563413507</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -344,8 +340,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20536913" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -355,7 +352,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.64730877" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" visible="true" weight="0.62889516" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" visible="true" weight="0.16005665" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -387,7 +384,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="before changing the database structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="before changing the database structure" />
+    <MESSAGE value="new database hibernate classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="new database hibernate classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -397,18 +395,6 @@
           <line>34</line>
           <properties />
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MyCrawler.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MyCrawler.java</url>
-          <line>130</line>
-          <properties />
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -460,27 +446,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/db/MusicBy_Id.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy_Id.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Album_Vocals.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/TransactionalCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/DataAccessLayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="64" lean-forward="true" selection-start-line="11" selection-start-column="64" selection-end-line="11" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Album.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -511,26 +476,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/Artist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Credits.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -541,26 +486,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/Genre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/LyricsBy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/MusicBy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
+        <state relative-caret-position="85">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -582,10 +510,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/Genre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Vocals.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="85">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/LyricsBy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/TransactionalCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/DataAccessLayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/Artist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -594,10 +580,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="130" selection-start-line="130" selection-end-line="130" />
+        <state relative-caret-position="978">
+          <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#MyCrawler#0;class#MyCrawler#0" />
+            <element signature="e#2474#3758#1" />
+            <element signature="e#2529#3690#0" />
+            <element signature="e#3174#3270#1" />
+            <element signature="e#3537#3633#1" />
+            <element signature="e#3918#3992#1" />
+            <element signature="method#visitPage#0;class#MyCrawler#0" />
+            <element signature="e#4355#4547#1" />
+            <element signature="method#nextPage#0;class#MyCrawler#0" />
+            <element signature="method#setupLogger#0;class#MyCrawler#0" />
+            <element signature="method#main#0;class#MyCrawler#0" />
+            <element signature="e#5163#5691#0" />
+            <element signature="e#5424#5681#1" />
+            <element signature="e#5712#5756#0" />
           </folding>
         </state>
       </provider>

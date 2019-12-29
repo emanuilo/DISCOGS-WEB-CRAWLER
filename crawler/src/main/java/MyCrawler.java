@@ -16,11 +16,13 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class MyCrawler {
-    private static final String seed = "https://www.discogs.com/search/?country_exact=Serbia";
+    private static final String SEED = "https://www.discogs.com/search/?country_exact=Serbia";
+    private static final String DISCOGSCOM = "https://www.discogs.com/";
     private static final int SHORT_TIMEOUT = 500;
-    private static final int LONG_TIMEOUT = 500;
+    private static final int LONG_TIMEOUT = 1000;
 
     private Logger albumLog;
+    private Logger artistLog;
 
     public MyCrawler(Logger logger) throws IOException {
 //        this.log = logger;
@@ -36,24 +38,35 @@ public class MyCrawler {
         albumLog.info("VISITED ALBUM: " + url);
         Document doc = Jsoup.connect(url).get();
 
-//        DataAccessLayer.transactional(new TransactionalCode<Void>() {
-//
-//            @Override
-//            public Void run(Session session) {
-                // Artist name
+        DataAccessLayer.transactional(new TransactionalCode<Void>() {
+
+            @Override
+            public Void run(Session session) {
+                // Artist names on the album
                 Elements elements = doc.select("div.profile > h1 > span > span[title]");
-                Artist artist = null;
+                List<String> artistNames = new ArrayList<>();
                 for (Element element : elements) {
-                    String artistName = element.attr("title");
-                    artist = new Artist(artistName);
+                    String artistPageLink = element.select("a").first().attr("href");
+                    String artistName = element.attr("a[href]");
+                    artistNames.add(artistName);
                 }
 
-//                Query query = session.createQuery("from Artist where name=:name");
-//                query.setParameter("name", artist.getName());
-//                List artists = query.list();
-//                if (artists.size() == 1){
-//                        artist = (Artist) artists.get(0);
-//                }
+                List<Artist> artists = new ArrayList<>();
+                for (String name : artistNames){
+                    Query query = session.createQuery("from Artist where name=:name");
+                    query.setParameter("name", name);
+                    List result = query.list();
+                    if (result.size() == 1){
+                        artists.add((Artist) artists.get(0));
+                    }
+                    else if (result.size() == 0){
+                        //artists.add()
+                    }
+                    else{
+                        //throw new Exception("More than one artist with the same name in the database!");
+                    }
+                }
+
 
 
                 // Album name
@@ -95,10 +108,15 @@ public class MyCrawler {
                     String trackName = element.text();
                 }
 
-//                return null;
-//            }
-//        });
+                return null;
+            }
+        });
+    }
 
+    public void visitArtistPage(String url) throws InterruptedException, IOException {
+        Thread.sleep(SHORT_TIMEOUT);
+        artistLog.info("VISITED ARTIST: " + url);
+        Document doc = Jsoup.connect(url).get();
 
 
     }
@@ -131,7 +149,7 @@ public class MyCrawler {
             Logger pageLog = Logger.getLogger("Page Logger");
             setupLogger(pageLog);
             MyCrawler crawler = new MyCrawler(pageLog);
-            String url = seed;
+            String url = SEED;
             while(!url.equals("")){
                 pageLog.info("VISITED PAGE: " + url);
 //                Thread.sleep(LONG_TIMEOUT);
