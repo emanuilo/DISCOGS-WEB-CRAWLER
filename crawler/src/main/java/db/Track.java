@@ -15,4 +15,10 @@ public class Track {
 
     @ManyToOne
     private Album album;
+
+    public Track(String name, int duration, Album album) {
+        this.name = name;
+        this.duration = duration;
+        this.album = album;
+    }
 }

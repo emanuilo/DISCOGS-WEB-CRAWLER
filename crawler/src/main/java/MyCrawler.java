@@ -1,6 +1,4 @@
-import db.Artist;
-import db.DataAccessLayer;
-import db.TransactionalCode;
+import db.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.jsoup.Jsoup;
@@ -31,6 +29,12 @@ public class MyCrawler {
         albumLog.addHandler(fileHandler);
         fileHandler.setFormatter(new SimpleFormatter());
         albumLog.info("Logger set up!");
+
+        artistLog = Logger.getLogger("Artist Logger");
+        FileHandler fileHandler2 = new FileHandler("logs/artists/artistLog" + System.currentTimeMillis() + ".log");
+        artistLog.addHandler(fileHandler2);
+        fileHandler.setFormatter(new SimpleFormatter());
+        artistLog.info("Logger set up!");
     }
 
     public void visitAlbumPage(String url) throws InterruptedException, IOException {
@@ -42,83 +46,143 @@ public class MyCrawler {
 
             @Override
             public Void run(Session session) {
-                // Artist names on the album
-                Elements elements = doc.select("div.profile > h1 > span > span[title]");
-                List<String> artistNames = new ArrayList<>();
-                for (Element element : elements) {
-                    String artistPageLink = element.select("a").first().attr("href");
-                    String artistName = element.attr("a[href]");
-                    artistNames.add(artistName);
-                }
-
-                List<Artist> artists = new ArrayList<>();
-                for (String name : artistNames){
-                    Query query = session.createQuery("from Artist where name=:name");
-                    query.setParameter("name", name);
-                    List result = query.list();
-                    if (result.size() == 1){
-                        artists.add((Artist) artists.get(0));
-                    }
-                    else if (result.size() == 0){
-                        //artists.add()
-                    }
-                    else{
-                        //throw new Exception("More than one artist with the same name in the database!");
-                    }
-                }
-
-
-
-                // Album name
-                String albumName = doc.select("div.profile > h1 > span").next().text();
-                String ratingValue = doc.select("span.rating_value").text();
-                // Country, released, genre, style
-                Elements elements2 = doc.select("div.profile > div");
-                while(elements2.size() > 0){
-                    switch (elements2.first().text()){
-                        case "Country:":
-                            elements2 = elements2.next();
-                            String country = elements2.first().text();
-                            break;
-                        case "Released:":
-                            elements2 = elements2.next();
-                            String released = elements2.first().text();
-                            break;
-                        case "Genre:":
-                            elements2 = elements2.next();
-                            Elements genres = elements2.first().select("a");
-                            for (Element genre : genres) {
-                                String genreName = genre.text();
+                try {
+                    // Artists on the album
+                    Elements elements = doc.select("div.profile > h1 > span > span[title]");
+                    List<Artist> artists = new ArrayList<>();
+                    for (Element element : elements) {
+                        String artistName = element.attr("title");
+                        // getting already present artists from the database
+                        Query query = session.createQuery("from Artist where name=:name");
+                        query.setParameter("name", artistName);
+                        List result = query.list();
+                        if (result.size() == 1){
+                            artists.add((Artist) result.get(0));
+                        }
+                        else if (result.size() == 0){
+                            String artistPageLink = element.select("a").first().attr("href");
+                            try {
+                                artists.add(getNewArtist(artistPageLink, artistName));
+                            } catch (InterruptedException | IOException e) {
+                                e.printStackTrace();
                             }
-                            break;
-                        case "Style:":
-                            elements2 = elements2.next();
-                            Elements styles = elements2.first().select("a");
-                            for (Element style : styles) {
-                                String styleName = style.text();
-                            }
-                            break;
+                        }
+                        else{
+                            throw new Exception("More than one artist with the same name in the database!");
+                        }
                     }
-                    elements2 = elements2.next();
-                }
 
-                // Tracklist
-                Elements tracklist = doc.select("span.tracklist_track_title");
-                for (Element element : tracklist) {
-                    String trackName = element.text();
-                }
 
+                    // Album name
+                    String albumName = doc.select("div.profile > h1 > span").next().text();
+                    String ratingValue = doc.select("span.rating_value").text();
+                    // Country, released, genre, style
+                    String country = "";
+                    String released = "";
+                    List<String> genreList = new ArrayList<>();
+                    List<String> styleList = new ArrayList<>();
+                    Elements elements2 = doc.select("div.profile > div");
+                    while(elements2.size() > 0){
+                        switch (elements2.first().text()){
+                            case "Country:":
+                                elements2 = elements2.next();
+                                country = elements2.first().text();
+                                break;
+                            case "Released:": case "Year":
+                                elements2 = elements2.next();
+                                String date = elements2.first().text();
+                                String[] s = date.split(" ");
+                                released = s[s.length - 1];
+                                break;
+                            case "Genre:":
+                                elements2 = elements2.next();
+                                Elements genres = elements2.first().select("a");
+                                for (Element genre : genres) {
+                                    String genreName = genre.text();
+                                    genreList.add(genreName);
+                                }
+                                break;
+                            case "Style:":
+                                elements2 = elements2.next();
+                                Elements styles = elements2.first().select("a");
+                                for (Element style : styles) {
+                                    String styleName = style.text();
+                                    styleList.add(styleName);
+                                }
+                                break;
+                        }
+                        elements2 = elements2.next();
+                    }
+
+
+                    // Versions
+                    Elements elements_versions = doc.select("table#versions > tbody > tr");
+                    int versions = Math.max(elements_versions.size() - 1, 0);
+
+                    Album newAlbum = new Album();
+                    newAlbum.setName(albumName);
+                    newAlbum.setRating(Float.parseFloat(ratingValue));
+                    newAlbum.setCountry(country);
+                    newAlbum.setVersions(versions);
+                    newAlbum.setReleased(Integer.parseInt(released));
+
+
+                    // Genres
+                    for (String genreName : genreList){
+                        Query query = session.createQuery("from Genre where name=:name");
+                        query.setParameter("name", genreName);
+                        List result = query.list();
+                        if (result.size() == 1){
+                            Genre genre = (Genre) result.get(0);
+                            //todo
+                        }
+                        else if (result.size() == 0){
+                            Genre genre = new Genre(genreName);
+                            // todo
+                        }
+
+                    }
+
+
+
+                    // Tracklist
+                    Elements tracklist = doc.select("tr.tracklist_track");
+                    List<Track> tracks = new ArrayList<>();
+                    for (Element element : tracklist) {
+                        String trackName = element.select("span.tracklist_track_title").text();
+                        String durationString = element.select("td.tracklist_track_duration > span").text();
+                        String[] split = durationString.split(":");
+                        int duration = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
+                        tracks.add(new Track(trackName, duration, newAlbum));
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
                 return null;
             }
         });
     }
 
-    public void visitArtistPage(String url) throws InterruptedException, IOException {
+    public Artist getNewArtist(String url, String artistName) throws InterruptedException, IOException {
         Thread.sleep(SHORT_TIMEOUT);
         artistLog.info("VISITED ARTIST: " + url);
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(DISCOGSCOM + url).get();
 
+        Elements elements = doc.select("div.profile > div");
+        String website = "";
+        while(elements.size() > 0){
+            if (elements.first().text().equals("Sites:")) {
+                elements = elements.next();
+                String href = elements.first().selectFirst("div > a").attr("href");
+                break;
+            }
+            elements = elements.next();
+        }
 
+        return new Artist(artistName, website);
     }
 
     public void visitPage(Document document) throws InterruptedException, IOException {

@@ -39,7 +39,7 @@
 		<mapping class="db.LyricsBy"/>
 		<mapping class="db.Album_Genre"/>
 		<mapping class="db.Album_Style"/>
-
+		<mapping class="db.Album_Artist"/>
 
 	</session-factory>
 

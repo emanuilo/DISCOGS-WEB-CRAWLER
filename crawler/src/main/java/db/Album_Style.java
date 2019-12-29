@@ -18,5 +18,14 @@ public class Album_Style {
 
         @ManyToOne
         Album album;
+
+        Album_Style_Id(Style style, Album album){
+            this.style = style;
+            this.album = album;
+        }
+    }
+
+    Album_Style(Album_Style_Id album_style_id){
+        this.album_style_id = album_style_id;
     }
 }

@@ -9,8 +9,9 @@ public class Style {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
-    private Album album;
-
     private String name;
+
+    public Style(String name) {
+        this.name = name;
+    }
 }

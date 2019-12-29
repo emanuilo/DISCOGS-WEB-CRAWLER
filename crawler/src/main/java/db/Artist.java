@@ -16,8 +16,9 @@ public class Artist {
 
     private String website;
 
-    public Artist(String name) {
+    public Artist(String name, String website) {
         this.name = name;
+        this.website = website;
     }
 
     public String getName() {

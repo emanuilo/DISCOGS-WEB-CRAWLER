@@ -9,8 +9,9 @@ public class Genre {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
-    private Album album;
-
     private String name;
+
+    public Genre(String name) {
+        this.name = name;
+    }
 }
