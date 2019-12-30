@@ -1,6 +1,7 @@
 import db.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,7 +19,7 @@ public class MyCrawler {
     private static final String DISCOGSCOM = "https://www.discogs.com/";
     private static final int SHORT_TIMEOUT = 500;
     private static final int LONG_TIMEOUT = 1000;
-
+    private static final float NO_RATING_VALUE = 0.0f;
     private Logger albumLog;
     private Logger artistLog;
 
@@ -46,31 +47,7 @@ public class MyCrawler {
 
             @Override
             public Void run(Session session) {
-                try {
-                    // Artists on the album
-                    Elements elements = doc.select("div.profile > h1 > span > span[title]");
-                    List<Artist> artists = new ArrayList<>();
-                    for (Element element : elements) {
-                        String artistName = element.attr("title");
-                        // getting already present artists from the database
-                        Query query = session.createQuery("from Artist where name=:name");
-                        query.setParameter("name", artistName);
-                        List result = query.list();
-                        if (result.size() == 1){
-                            artists.add((Artist) result.get(0));
-                        }
-                        else if (result.size() == 0){
-                            String artistPageLink = element.select("a").first().attr("href");
-                            try {
-                                artists.add(getNewArtist(artistPageLink, artistName));
-                            } catch (InterruptedException | IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        else{
-                            throw new Exception("More than one artist with the same name in the database!");
-                        }
-                    }
+//                try {
 
 
                     // Album name
@@ -88,7 +65,7 @@ public class MyCrawler {
                                 elements2 = elements2.next();
                                 country = elements2.first().text();
                                 break;
-                            case "Released:": case "Year":
+                            case "Released:": case "Year:":
                                 elements2 = elements2.next();
                                 String date = elements2.first().text();
                                 String[] s = date.split(" ");
@@ -121,46 +98,92 @@ public class MyCrawler {
 
                     Album newAlbum = new Album();
                     newAlbum.setName(albumName);
-                    newAlbum.setRating(Float.parseFloat(ratingValue));
+                    if (!ratingValue.equals("--"))
+                        newAlbum.setRating(Float.parseFloat(ratingValue));
+                    else
+                        newAlbum.setRating(NO_RATING_VALUE);
                     newAlbum.setCountry(country);
                     newAlbum.setVersions(versions);
                     newAlbum.setReleased(Integer.parseInt(released));
+                    session.save(newAlbum);
+
+                    // Artists on the album
+                    Elements elements = doc.select("div.profile > h1 > span > span[title]");
+                    List<Artist> artists = new ArrayList<>();
+                    for (Element element : elements) {
+                        String artistName = element.attr("title");
+                        // getting already present artists from the database
+                        Query query = session.createQuery("from Artist where name=:name");
+                        query.setParameter("name", artistName);
+                        List result = query.list();
+                        Artist artist = null;
+                        if (result.size() == 1){
+                            artist = (Artist) result.get(0);
+                        }
+                        else if (result.size() == 0){
+                            String artistPageLink = element.select("a").first().attr("href");
+                            try {
+                                artist = getNewArtist(artistPageLink, artistName);
+                            } catch (InterruptedException | IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        artists.add(artist);
+                        session.save(artist);
+                        session.save(new Album_Artist(new Album_Artist.Album_Artist_Id(newAlbum, artist)));
+                    }
 
 
                     // Genres
+                    List<Album_Genre> albumGenreList = new ArrayList<>();
                     for (String genreName : genreList){
                         Query query = session.createQuery("from Genre where name=:name");
                         query.setParameter("name", genreName);
                         List result = query.list();
-                        if (result.size() == 1){
-                            Genre genre = (Genre) result.get(0);
-                            //todo
-                        }
-                        else if (result.size() == 0){
-                            Genre genre = new Genre(genreName);
-                            // todo
-                        }
-
+                        Genre genre;
+                        if (result.size() == 1)
+                            genre = (Genre) result.get(0);
+                        else //size is 0
+                            genre = new Genre(genreName);
+                        Album_Genre album_genre = new Album_Genre(new Album_Genre.Album_Genre_Id(genre, newAlbum));
+                        albumGenreList.add(album_genre);
+                        session.save(genre);
+                        session.save(album_genre);
                     }
 
-
+                    // Styles
+                    List<Album_Style> albumStyleList = new ArrayList<>();
+                    for (String styleName : styleList){
+                        Query query = session.createQuery("from Style where name=:name");
+                        query.setParameter("name", styleName);
+                        List result = query.list();
+                        Style style;
+                        if(result.size() == 1)
+                            style = (Style) result.get(0);
+                        else
+                            style = new Style(styleName);
+                        Album_Style album_style = new Album_Style(new Album_Style.Album_Style_Id(style, newAlbum));
+                        albumStyleList.add(album_style);
+                        session.save(style);
+                        session.save(album_style);
+                    }
 
                     // Tracklist
-                    Elements tracklist = doc.select("tr.tracklist_track");
-                    List<Track> tracks = new ArrayList<>();
-                    for (Element element : tracklist) {
-                        String trackName = element.select("span.tracklist_track_title").text();
-                        String durationString = element.select("td.tracklist_track_duration > span").text();
-                        String[] split = durationString.split(":");
-                        int duration = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
-                        tracks.add(new Track(trackName, duration, newAlbum));
-                    }
+//                    Elements tracklist = doc.select("tr.tracklist_track");
+//                    List<Track> tracks = new ArrayList<>();
+//                    for (Element element : tracklist) {
+//                        String trackName = element.select("span.tracklist_track_title").text();
+//                        String durationString = element.select("td.tracklist_track_duration > span").text();
+//                        String[] split = durationString.split(":");
+//                        int duration = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
+//                        tracks.add(new Track(trackName, duration, newAlbum));
+//                    }
 
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.exit(1);
-                }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+////                    System.exit(1);
+//                }
                 return null;
             }
         });
@@ -169,17 +192,21 @@ public class MyCrawler {
     public Artist getNewArtist(String url, String artistName) throws InterruptedException, IOException {
         Thread.sleep(SHORT_TIMEOUT);
         artistLog.info("VISITED ARTIST: " + url);
-        Document doc = Jsoup.connect(DISCOGSCOM + url).get();
-
-        Elements elements = doc.select("div.profile > div");
         String website = "";
-        while(elements.size() > 0){
-            if (elements.first().text().equals("Sites:")) {
+        try{
+            Document doc = Jsoup.connect(DISCOGSCOM + url).get();
+
+            Elements elements = doc.select("div.profile > div");
+            while(elements.size() > 0){
+                if (elements.first().text().equals("Sites:")) {
+                    elements = elements.next();
+                    website = elements.first().selectFirst("div > a").attr("href");
+                    break;
+                }
                 elements = elements.next();
-                String href = elements.first().selectFirst("div > a").attr("href");
-                break;
             }
-            elements = elements.next();
+        } catch (HttpStatusException exception){
+            System.out.println("Placeholder page!");
         }
 
         return new Artist(artistName, website);

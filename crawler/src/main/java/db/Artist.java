@@ -16,6 +16,8 @@ public class Artist {
 
     private String website;
 
+    public Artist(){}
+
     public Artist(String name, String website) {
         this.name = name;
         this.website = website;

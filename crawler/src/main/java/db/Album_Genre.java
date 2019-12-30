@@ -1,9 +1,6 @@
 package db;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -12,13 +9,21 @@ public class Album_Genre {
     @EmbeddedId
     Album_Genre_Id album_genre_id;
 
-    class Album_Genre_Id implements Serializable{
+    @Embeddable
+    public static class Album_Genre_Id implements Serializable{
         @ManyToOne
         Genre genre;
 
         @ManyToOne
         Album album;
+
+        public Album_Genre_Id(Genre genre, Album album) {
+            this.genre = genre;
+            this.album = album;
+        }
     }
 
-
+    public Album_Genre(Album_Genre_Id album_genre_id) {
+        this.album_genre_id = album_genre_id;
+    }
 }
