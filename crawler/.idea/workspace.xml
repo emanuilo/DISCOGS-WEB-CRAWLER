@@ -4,13 +4,6 @@
     <list default="true" id="0787091f-11bc-4129-a762-469963980ea5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MyCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyCrawler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Album_Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Album_Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/ArrangedBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/ArrangedBy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Credits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Credits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/LyricsBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/LyricsBy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/MusicBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/MusicBy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/Track.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Track.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -59,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="226" column="41" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
+            <state relative-caret-position="86">
+              <caret line="220" selection-start-line="220" selection-end-line="220" />
               <folding>
                 <element signature="method#nextPage#0;class#MyCrawler#0" />
                 <element signature="method#setupLogger#0;class#MyCrawler#0" />
@@ -263,7 +256,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577986967020" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577988378373" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -362,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577727542176</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="persistence of all data except credits and vocals">
+      <created>1577987021463</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1577987021463</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -376,7 +376,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21342282" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -388,7 +387,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.34985834" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" visible="true" weight="0.5410765" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" visible="true" weight="0.5056657" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -464,7 +463,8 @@
     <MESSAGE value="getting artist website from the artist's page" />
     <MESSAGE value="impl: fetching album data, tracklist, artist data" />
     <MESSAGE value="persistence of album and artist data" />
-    <option name="LAST_COMMIT_MESSAGE" value="persistence of album and artist data" />
+    <MESSAGE value="persistence of all data except credits and vocals" />
+    <option name="LAST_COMMIT_MESSAGE" value="persistence of all data except credits and vocals" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -477,15 +477,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/MyCrawler.java</url>
-          <line>55</line>
+          <line>57</line>
           <properties />
           <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/MyCrawler.java</url>
-          <line>221</line>
-          <properties />
-          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -698,8 +692,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="226" column="41" selection-start-line="226" selection-start-column="41" selection-end-line="226" selection-end-column="41" />
+        <state relative-caret-position="86">
+          <caret line="220" selection-start-line="220" selection-end-line="220" />
           <folding>
             <element signature="method#nextPage#0;class#MyCrawler#0" />
             <element signature="method#setupLogger#0;class#MyCrawler#0" />

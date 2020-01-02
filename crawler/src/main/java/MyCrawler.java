@@ -13,7 +13,9 @@ import org.jsoup.select.Elements;
 import javax.persistence.FlushModeType;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -216,15 +218,16 @@ public class MyCrawler {
                     }
 
                     // Credits
-                    Elements creditsElements = doc.selectFirst("div.credits").select("a");
+                    Elements creditsElements = doc.select("div.credits a");
+                    Set<String> names = new HashSet<>();
                     for (Element creditElement : creditsElements){
                         String creditsArtistName = creditElement.text();
-                        String creditsArtistUrl = creditElement.attr("href");
-                        Artist creditsArtist = getArtist(creditsArtistName, creditsArtistUrl, session);
-                        Credits credits = new Credits(new Credits.Credits_Id(newAlbum, creditsArtist));
-                        session.saveOrUpdate(credits);
-                        //TODO OVDE SAM STAO
-                        // SET WITH NAMES
+                        if(names.add(creditsArtistName)){
+                            String creditsArtistUrl = creditElement.attr("href");
+                            Artist creditsArtist = getArtist(creditsArtistName, creditsArtistUrl, session);
+                            Credits credits = new Credits(new Credits.Credits_Id(newAlbum, creditsArtist));
+                            session.save(credits);
+                        }
                     }
 
                     return null;
