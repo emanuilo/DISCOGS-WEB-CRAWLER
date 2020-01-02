@@ -23,6 +23,9 @@ public class Album_Genre {
         }
     }
 
+    public Album_Genre() {
+    }
+
     public Album_Genre(Album_Genre_Id album_genre_id) {
         this.album_genre_id = album_genre_id;
     }

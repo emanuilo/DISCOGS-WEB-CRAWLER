@@ -10,11 +10,23 @@ public class ArrangedBy {
     ArrangedBy_Id arrangedBy_id;
 
     @Embeddable
-    private class ArrangedBy_Id implements Serializable {
+    public static class ArrangedBy_Id implements Serializable {
+        @ManyToOne
+        private Track track;
+
         @ManyToOne
         private Artist artist;
 
-        @ManyToOne
-        private Track track;
+        public ArrangedBy_Id(Track track, Artist artist) {
+            this.track = track;
+            this.artist = artist;
+        }
+    }
+
+    public ArrangedBy() {
+    }
+
+    public ArrangedBy(ArrangedBy_Id arrangedBy_id) {
+        this.arrangedBy_id = arrangedBy_id;
     }
 }

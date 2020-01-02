@@ -1,5 +1,8 @@
 import db.*;
+import org.hibernate.Criteria;
+import org.hibernate.FlushMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -7,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.persistence.FlushModeType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +43,13 @@ public class MyCrawler {
     }
 
     public void visitAlbumPage(String url) throws InterruptedException, IOException {
-        Thread.sleep(SHORT_TIMEOUT);
+//        Thread.sleep(SHORT_TIMEOUT);
         albumLog.info("VISITED ALBUM: " + url);
         Document doc = Jsoup.connect(url).get();
 
-        DataAccessLayer.transactional(new TransactionalCode<Void>() {
-
-            @Override
-            public Void run(Session session) {
-//                try {
-
-
+        DataAccessLayer.transactional(
+                session -> {
+                    session.setFlushMode(FlushModeType.AUTO);
                     // Album name
                     String albumName = doc.select("div.profile > h1 > span").next().text();
                     String ratingValue = doc.select("span.rating_value").text();
@@ -59,13 +59,14 @@ public class MyCrawler {
                     List<String> genreList = new ArrayList<>();
                     List<String> styleList = new ArrayList<>();
                     Elements elements2 = doc.select("div.profile > div");
-                    while(elements2.size() > 0){
-                        switch (elements2.first().text()){
+                    while (elements2.size() > 0) {
+                        switch (elements2.first().text()) {
                             case "Country:":
                                 elements2 = elements2.next();
                                 country = elements2.first().text();
                                 break;
-                            case "Released:": case "Year:":
+                            case "Released:":
+                            case "Year:":
                                 elements2 = elements2.next();
                                 String date = elements2.first().text();
                                 String[] s = date.split(" ");
@@ -117,26 +118,21 @@ public class MyCrawler {
                         query.setParameter("name", artistName);
                         List result = query.list();
                         Artist artist = null;
-                        if (result.size() == 1){
+                        if (result.size() == 1) {
                             artist = (Artist) result.get(0);
-                        }
-                        else if (result.size() == 0){
+                        } else if (result.size() == 0) {
                             String artistPageLink = element.select("a").first().attr("href");
-                            try {
-                                artist = getNewArtist(artistPageLink, artistName);
-                            } catch (InterruptedException | IOException e) {
-                                e.printStackTrace();
-                            }
+                            artist = getNewArtist(artistPageLink, artistName);
                         }
                         artists.add(artist);
                         session.save(artist);
-                        session.save(new Album_Artist(new Album_Artist.Album_Artist_Id(newAlbum, artist)));
+                        session.persist(new Album_Artist(new Album_Artist.Album_Artist_Id(newAlbum, artist)));
                     }
 
 
                     // Genres
                     List<Album_Genre> albumGenreList = new ArrayList<>();
-                    for (String genreName : genreList){
+                    for (String genreName : genreList) {
                         Query query = session.createQuery("from Genre where name=:name");
                         query.setParameter("name", genreName);
                         List result = query.list();
@@ -153,12 +149,12 @@ public class MyCrawler {
 
                     // Styles
                     List<Album_Style> albumStyleList = new ArrayList<>();
-                    for (String styleName : styleList){
+                    for (String styleName : styleList) {
                         Query query = session.createQuery("from Style where name=:name");
                         query.setParameter("name", styleName);
                         List result = query.list();
                         Style style;
-                        if(result.size() == 1)
+                        if (result.size() == 1)
                             style = (Style) result.get(0);
                         else
                             style = new Style(styleName);
@@ -169,31 +165,93 @@ public class MyCrawler {
                     }
 
                     // Tracklist
-//                    Elements tracklist = doc.select("tr.tracklist_track");
-//                    List<Track> tracks = new ArrayList<>();
-//                    for (Element element : tracklist) {
-//                        String trackName = element.select("span.tracklist_track_title").text();
-//                        String durationString = element.select("td.tracklist_track_duration > span").text();
-//                        String[] split = durationString.split(":");
-//                        int duration = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
-//                        tracks.add(new Track(trackName, duration, newAlbum));
-//                    }
+                    Elements tracklist = doc.select("tr.tracklist_track");
+                    List<Track> tracks = new ArrayList<>();
+                    for (Element element : tracklist) {
+                        String trackName = element.select("span.tracklist_track_title").text();
+                        String durationString = element.select("td.tracklist_track_duration > span").text();
+                        String[] split = durationString.split(":");
+                        Track newTrack = null;
+                        if (!durationString.equals("")) {
+                            int duration = Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
+                            newTrack = new Track(trackName, duration, newAlbum);
+                            tracks.add(newTrack);
+                        } else {
+                            newTrack = new Track(trackName, newAlbum);
+                            tracks.add(newTrack);
+                        }
+                        session.save(newTrack);
 
+                        Elements select = element.select("span.tracklist_extra_artist_span");
+                        for (Element element2 : select) {
+                            String text = element2.text();
+                            if (text.contains("Lyrics By")) {
+                                for (Element element3 : element2.select("a")){
+                                    String lyricsByArtistName = element3.text();
+                                    String lyricsByArtistUrl = element3.attr("href");
+                                    Artist lyricsByArtist = getArtist(lyricsByArtistName, lyricsByArtistUrl, session);
+                                    LyricsBy lyricsBy = new LyricsBy(new LyricsBy.LyricsBy_Id(newTrack, lyricsByArtist));
+                                    session.save(lyricsBy);
+                                }
+                            }
+                            if (text.contains("Arranged By")) {
+                                for (Element element3 : element2.select("a")){
+                                    String arrangedByArtistName = element3.text();
+                                    String arrangedByArtistUrl = element3.attr("href");
+                                    Artist arrangedByArtist = getArtist(arrangedByArtistName, arrangedByArtistUrl, session);
+                                    ArrangedBy arrangedBy = new ArrangedBy(new ArrangedBy.ArrangedBy_Id(newTrack, arrangedByArtist));
+                                    session.save(arrangedBy);
+                                }
+                            }
+                            if (text.contains("Music By")) {
+                                for (Element element3 : element2.select("a")){
+                                    String musicByArtistName = element3.text();
+                                    String musicByArtistUrl = element3.attr("href");
+                                    Artist mysicByArtist = getArtist(musicByArtistName, musicByArtistUrl, session);
+                                    MusicBy musicBy = new MusicBy(new MusicBy.MusicBy_Id(newTrack, mysicByArtist));
+                                    session.save(musicBy);
+                                }
+                            }
+                        }
+                    }
 
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-////                    System.exit(1);
-//                }
-                return null;
-            }
-        });
+                    // Credits
+                    Elements creditsElements = doc.selectFirst("div.credits").select("a");
+                    for (Element creditElement : creditsElements){
+                        String creditsArtistName = creditElement.text();
+                        String creditsArtistUrl = creditElement.attr("href");
+                        Artist creditsArtist = getArtist(creditsArtistName, creditsArtistUrl, session);
+                        Credits credits = new Credits(new Credits.Credits_Id(newAlbum, creditsArtist));
+                        session.saveOrUpdate(credits);
+                        //TODO OVDE SAM STAO
+                        // SET WITH NAMES
+                    }
+
+                    return null;
+                }
+        );
     }
 
-    public Artist getNewArtist(String url, String artistName) throws InterruptedException, IOException {
-        Thread.sleep(SHORT_TIMEOUT);
-        artistLog.info("VISITED ARTIST: " + url);
+    public Artist getArtist(String artistName, String artistPageLink, Session session) {
+        Query query = session.createQuery("from Artist where name=:name");
+        query.setParameter("name", artistName);
+        List result = query.list();
+        Artist artist = null;
+        if (result.size() == 1) {
+            artist = (Artist) result.get(0);
+        } else if (result.size() == 0) {
+            artist = getNewArtist(artistPageLink, artistName);
+            session.save(artist);
+        }
+
+        return artist;
+    }
+
+    public Artist getNewArtist(String url, String artistName) {
         String website = "";
         try{
+//            Thread.sleep(SHORT_TIMEOUT);
+            artistLog.info("VISITED ARTIST: " + url);
             Document doc = Jsoup.connect(DISCOGSCOM + url).get();
 
             Elements elements = doc.select("div.profile > div");
@@ -207,6 +265,8 @@ public class MyCrawler {
             }
         } catch (HttpStatusException exception){
             System.out.println("Placeholder page!");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return new Artist(artistName, website);
@@ -241,6 +301,7 @@ public class MyCrawler {
             setupLogger(pageLog);
             MyCrawler crawler = new MyCrawler(pageLog);
             String url = SEED;
+            crawler.visitAlbumPage("https://www.discogs.com/Sa%C5%A1a-Kova%C4%8Devi%C4%87-Ornament/release/5051246");
             while(!url.equals("")){
                 pageLog.info("VISITED PAGE: " + url);
 //                Thread.sleep(LONG_TIMEOUT);
