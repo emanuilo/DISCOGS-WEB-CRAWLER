@@ -220,16 +220,34 @@ public class MyCrawler {
                     // Credits
                     Elements creditsElements = doc.select("div.credits a");
                     Set<String> names = new HashSet<>();
-                    for (Element creditElement : creditsElements){
-                        String creditsArtistName = creditElement.text();
+                    for (Element creditsElement : creditsElements){
+                        String creditsArtistName = creditsElement.text();
                         if(names.add(creditsArtistName)){
-                            String creditsArtistUrl = creditElement.attr("href");
+                            String creditsArtistUrl = creditsElement.attr("href");
                             Artist creditsArtist = getArtist(creditsArtistName, creditsArtistUrl, session);
                             Credits credits = new Credits(new Credits.Credits_Id(newAlbum, creditsArtist));
                             session.save(credits);
                         }
                     }
 
+                    // Vocals
+                    creditsElements = doc.select("div.credits li");
+                    for (Element creditsElement : creditsElements){
+                        Element roleElement = creditsElement.selectFirst("span.role");
+                        if (roleElement != null){
+                            String roleString = roleElement.text();
+                            if (roleString.contains("Vocals") || roleString.contains("vocals")){
+                                Elements vocalsElements = creditsElement.select("a");
+                                for (Element vocalsElement : vocalsElements){
+                                    String vocalsArtistName = vocalsElement.text();
+                                    String vocalsArtistUrl = vocalsElement.attr("href");
+                                    Artist vocalsArtist = getArtist(vocalsArtistName, vocalsArtistUrl, session);
+                                    Vocals vocals = new Vocals(new Vocals.Vocals_Id(newAlbum, vocalsArtist));
+                                    session.save(vocals);
+                                }
+                            }
+                        }
+                    }
                     return null;
                 }
         );

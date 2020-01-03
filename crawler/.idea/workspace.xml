@@ -4,6 +4,7 @@
     <list default="true" id="0787091f-11bc-4129-a762-469963980ea5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MyCrawler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MyCrawler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/Vocals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/Vocals.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -52,9 +53,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="220" selection-start-line="220" selection-end-line="220" />
+            <state relative-caret-position="307">
+              <caret line="283" column="17" lean-forward="true" selection-start-line="283" selection-start-column="17" selection-end-line="283" selection-end-column="17" />
               <folding>
+                <element signature="method#visitPage#0;class#MyCrawler#0" />
                 <element signature="method#nextPage#0;class#MyCrawler#0" />
                 <element signature="method#setupLogger#0;class#MyCrawler#0" />
               </folding>
@@ -63,9 +65,32 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/Vocals.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#516#517#0" expanded="true" />
+                <element signature="e#558#559#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/db/Track.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
+            <state relative-caret-position="201">
               <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
             </state>
           </provider>
@@ -93,15 +118,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/TransactionalCode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/db/MusicBy.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="265">
@@ -123,18 +139,6 @@
                 <element signature="imports" expanded="true" />
                 <element signature="e#607#608#0" expanded="true" />
                 <element signature="e#651#652#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/db/Album_Artist.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/main/java/db/MusicBy_Id.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/LyricsBy_Id.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/ArrangedBy_Id.java" />
-        <option value="$PROJECT_DIR$/src/main/java/db/Vocals.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Genre.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Style.java" />
@@ -185,6 +188,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/db/Credits.java" />
         <option value="$PROJECT_DIR$/src/main/java/db/Album_Genre.java" />
+        <option value="$PROJECT_DIR$/src/main/java/db/Vocals.java" />
         <option value="$PROJECT_DIR$/src/main/java/MyCrawler.java" />
       </list>
     </option>
@@ -256,7 +260,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577988378373" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578046462067" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -362,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577987021463</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="persistence of credits">
+      <created>1577988405458</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1577988405458</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -376,6 +387,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21342282" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -386,12 +398,12 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.34985834" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" visible="true" weight="0.5056657" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.15864022" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.46458924" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.07507082" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.38101983" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50067115" side_tool="true" weight="0.62889516" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.3286119" />
@@ -464,7 +476,8 @@
     <MESSAGE value="impl: fetching album data, tracklist, artist data" />
     <MESSAGE value="persistence of album and artist data" />
     <MESSAGE value="persistence of all data except credits and vocals" />
-    <option name="LAST_COMMIT_MESSAGE" value="persistence of all data except credits and vocals" />
+    <MESSAGE value="persistence of credits" />
+    <option name="LAST_COMMIT_MESSAGE" value="persistence of credits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -480,6 +493,12 @@
           <line>57</line>
           <properties />
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/MyCrawler.java</url>
+          <line>233</line>
+          <properties />
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -527,16 +546,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/db/MusicBy_Id.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/db/ArrangedBy_Id.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Album_Vocals.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/Vocals.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -595,13 +604,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/Track.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/TransactionalCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -654,13 +656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/db/Album_Genre.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
@@ -690,11 +685,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/Vocals.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#516#517#0" expanded="true" />
+            <element signature="e#558#559#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/Track.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MyCrawler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="220" selection-start-line="220" selection-end-line="220" />
+        <state relative-caret-position="307">
+          <caret line="283" column="17" lean-forward="true" selection-start-line="283" selection-start-column="17" selection-end-line="283" selection-end-column="17" />
           <folding>
+            <element signature="method#visitPage#0;class#MyCrawler#0" />
             <element signature="method#nextPage#0;class#MyCrawler#0" />
             <element signature="method#setupLogger#0;class#MyCrawler#0" />
           </folding>
