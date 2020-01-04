@@ -18,7 +18,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 public class MyCrawler {
-    private static final String SEED = "https://www.discogs.com/search/?country_exact=Serbia";
+//    private static final String SEED = "https://www.discogs.com/search/?country_exact=Serbia";
+    private static final String SEED = "https://www.discogs.com/search/?country_exact=Yugoslavia";
     private static final String DISCOGSCOM = "https://www.discogs.com/";
     private static final int SHORT_TIMEOUT = 500;
     private static final int LONG_TIMEOUT = 1000;
@@ -354,8 +355,8 @@ public class MyCrawler {
             Logger pageLog = Logger.getLogger("Page Logger");
             setupLogger(pageLog);
             MyCrawler crawler = new MyCrawler(pageLog);
-//            String url = SEED; // from the scratch
-            String url = crawler.continueVisitPage(Jsoup.connect(CONTINUE_PAGE_URL).get()); // continue from a specific album and page
+            String url = SEED; // from the scratch
+//            String url = crawler.continueVisitPage(Jsoup.connect(CONTINUE_PAGE_URL).get()); // continue from a specific album and page
             while(!url.equals("")){
                 pageLog.info("VISITED PAGE: " + url);
 //                Thread.sleep(LONG_TIMEOUT);
