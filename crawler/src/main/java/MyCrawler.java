@@ -346,8 +346,8 @@ public class MyCrawler {
         logger.info("Logger set up!");
     }
 
-    public static final String CONTINUE_PAGE_URL = "https://www.discogs.com/search/?page=169&country_exact=Serbia";
-    public static final String CONTINUE_ALBUM_URL = "https://www.discogs.com/Various-Milan-B-Popovi%C4%87-Hroni%C4%8Dno-Neumorni/master/834449";
+    public static final String CONTINUE_PAGE_URL = "https://www.discogs.com/search/?page=59&country_exact=Yugoslavia";
+    public static final String CONTINUE_ALBUM_URL = "https://www.discogs.com/Jazo-2-Koroni-Moje-Nove-Pjesme/release/13887223";
 
     public static void main(String[] args) {
         try {
@@ -355,8 +355,8 @@ public class MyCrawler {
             Logger pageLog = Logger.getLogger("Page Logger");
             setupLogger(pageLog);
             MyCrawler crawler = new MyCrawler(pageLog);
-            String url = SEED; // from the scratch
-//            String url = crawler.continueVisitPage(Jsoup.connect(CONTINUE_PAGE_URL).get()); // continue from a specific album and page
+//            String url = SEED; // from the scratch
+            String url = crawler.continueVisitPage(Jsoup.connect(CONTINUE_PAGE_URL).get()); // continue from a specific album and page
             while(!url.equals("")){
                 pageLog.info("VISITED PAGE: " + url);
 //                Thread.sleep(LONG_TIMEOUT);

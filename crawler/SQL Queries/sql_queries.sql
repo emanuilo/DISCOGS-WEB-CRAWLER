@@ -114,6 +114,6 @@ select a.name, a.website
 from artist a
 where a.website <> '' and 
 
-
+//TODO ISKLJUCI FACEBOOK ITD
 
 
