@@ -113,9 +113,10 @@ public class MyCrawler {
 
                         // Artists on the album
                         Elements elements = doc.select("div.profile > h1 > span > span[title]");
-                        List<Artist> artists = new ArrayList<>();
+                        Set<String> artistsNamesSet = new HashSet<>();
                         for (Element element : elements) {
                             String artistName = element.attr("title");
+                            if (!artistsNamesSet.add(artistName)) continue;
                             // getting already present artists from the database
                             Query query = session.createQuery("from Artist where name=:name");
                             query.setParameter("name", artistName);
@@ -127,7 +128,6 @@ public class MyCrawler {
                                 String artistPageLink = element.select("a").first().attr("href");
                                 artist = getNewArtist(artistPageLink, artistName);
                             }
-                            artists.add(artist);
                             session.save(artist);
                             session.persist(new Album_Artist(new Album_Artist.Album_Artist_Id(newAlbum, artist)));
                         }
@@ -346,8 +346,8 @@ public class MyCrawler {
         logger.info("Logger set up!");
     }
 
-    public static final String CONTINUE_PAGE_URL = "https://www.discogs.com/search/?page=59&country_exact=Yugoslavia";
-    public static final String CONTINUE_ALBUM_URL = "https://www.discogs.com/Jazo-2-Koroni-Moje-Nove-Pjesme/release/13887223";
+    public static final String CONTINUE_PAGE_URL = "https://www.discogs.com/search/?page=168&country_exact=Yugoslavia";
+    public static final String CONTINUE_ALBUM_URL = "https://www.discogs.com/Predrag-Drezgi%C4%87-Predrag-Drezgi%C4%87/release/12520026";
 
     public static void main(String[] args) {
         try {
