@@ -2,6 +2,7 @@ import psycopg2 as postgres
 import pandas as pd
 import enum
 from sklearn.cluster import KMeans
+from sklearn.cluster import MeanShift, estimate_bandwidth
 import numpy as np
 import math
 
@@ -87,12 +88,12 @@ print("--------------------------")
 print("Izabrati algoritam: ")
 print("--------------------------")
 print("1. K Means")
-print("2. Neki drugi")
+print("2. Mean Shift")
 print("3. Kraj")
 print("--------------------------")
 user_action = input("Izbor: ")
 
-if user_action == "1":
+if user_action == "1" or user_action == '2':
     print("--------------------------")
     print("Izabrati ulazne podatke: ")
     print("--------------------------")
@@ -113,11 +114,6 @@ if user_action == "1":
         else:
             break
 
-    print("--------------------------")
-    print("Uneti broj klastera: ")
-    print("--------------------------")
-    num_of_clusters = input("Unos: ")
-
     connection = postgres.connect(user="postgres",
                                   password="root",
                                   host="localhost",
@@ -127,17 +123,50 @@ if user_action == "1":
     results = pd.read_sql(query, connection)
     featureVectors = getFeatureVectors(results, input_args)
 
-    X = np.array(featureVectors)
-    kmeans = KMeans(n_clusters=int(num_of_clusters), random_state=0).fit(X)
-    kmeans_result = kmeans.predict(X)
-    kmeans_result = kmeans_result.tolist()
+    if user_action == '1':
+        print("--------------------------")
+        print("Uneti broj klastera: ")
+        print("--------------------------")
+        num_of_clusters = int(input("Unos: "))
 
-    output_strings = []
-    for album_data, kmeans_cluster in zip(results.values, kmeans_result):
-        output_strings.append('    ' + str(kmeans_cluster) + '      ' + str(album_data))
+        X = np.array(featureVectors)
+        kmeans = KMeans(n_clusters=num_of_clusters, random_state=0).fit(X)
+        kmeans_result = kmeans.predict(X)
+        kmeans_result = kmeans_result.tolist()
 
-    # sort by a cluster
-    output_strings.sort()
-    for str in output_strings:
-        print(str)
+        clusters_map = []
+        for i in range(0, num_of_clusters):
+            clusters_map.append(0)
+
+        output_strings = []
+        for album_data, kmeans_cluster in zip(results.values, kmeans_result):
+            output_strings.append('     ' + str(kmeans_cluster) + '      ' + str(album_data))
+            clusters_map[kmeans_cluster] += 1
+
+        # sort by a cluster
+        output_strings.sort()
+        for row in output_strings:
+            print(row)
+
+        for i in range(0, num_of_clusters):
+            print('Cluster ' + str(i) + ': ' + str(clusters_map[i]))
+
+    elif user_action == '2':
+        X = np.array(featureVectors)
+        bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=500)
+        ms = MeanShift(bandwidth=bandwidth, bin_seeding=True).fit(X)
+        meanShift_results = ms.predict(X)
+        meanShift_results = meanShift_results.tolist()
+
+        output_strings = []
+        for album_data, meanShift_cluster in zip(results.values, meanShift_results):
+            output_strings.append('     ' + str(meanShift_cluster) + '      ' + str(album_data))
+        # sort by a cluster
+        output_strings.sort()
+        for row in output_strings:
+            print(row)
+
+        labels_unique = np.unique(ms.labels_)
+        n_clusters_ = len(labels_unique)
+        print("number of estimated clusters : %d" % n_clusters_)
 
